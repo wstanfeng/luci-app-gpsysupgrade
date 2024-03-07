@@ -5,9 +5,9 @@ local util = require "luci.util"
 local i18n = require "luci.i18n"
 local ipkg = require("luci.model.ipkg")
 local api = require "luci.model.cbi.gpsysupgrade.api"
-local Variable1 = "ywt114"
-local Variable2 = "OpenWrt"
-local Variable3 = "x86_64"
+local Variable1 = "wstanfeng"
+local Variable2 = "OpenWrt-Diy"
+local Variable3 = "X86_64_MINI"
 local Variable4 = "6.1"
 
 function get_system_version()
