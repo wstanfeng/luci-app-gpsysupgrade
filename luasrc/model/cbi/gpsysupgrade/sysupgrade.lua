@@ -6,8 +6,8 @@ local i18n = require "luci.i18n"
 local ipkg = require("luci.model.ipkg")
 local api = require "luci.model.cbi.gpsysupgrade.api"
 local Variable1 = "wstanfeng"
-local Variable2 = "Actions-OpenWrt"
-local Variable3 = "X86_64"
+local Variable2 = "OpenWrt-LEDE"
+local Variable3 = "X86_64_MINI"
 
 function get_system_version()
 	local system_version = luci.sys.exec("[ -f '/etc/openwrt_version' ] && echo -n `cat /etc/openwrt_version` | tr -d '\n'")
@@ -37,9 +37,9 @@ function to_check()
 	if model == "x86_64" then
 		check_update()
 		if fs.access("/sys/firmware/efi") then
-			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "/immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz"
+			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "/openwrt-x86-64-generic-squashfs-combined-efi.img.gz"
 		else
-			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "/immortalwrt-x86-64-generic-squashfs-combined.img.gz"
+			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "/openwrt-x86-64-generic-squashfs-combined.img.gz"
 		end
 	else
 		local needs_update = false
