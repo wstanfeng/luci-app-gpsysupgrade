@@ -6,10 +6,9 @@ local util = require "luci.util"
 local i18n = require "luci.i18n"
 local ipkg = require("luci.model.ipkg")
 local api = require "luci.model.cbi.gpsysupgrade.api"
-local Variable1 = "ywt114"
-local Variable2 = "OpenWrt"
-local Variable3 = "x86_64"
-local Variable4 = "6.1"
+local Variable1 = "wstanfeng"
+local Variable2 = "Actions-OpenWrt"
+local Variable3 = "X86_64_CT"
 
 function get_system_version()
 	local system_version = luci.sys.exec("[ -f '/etc/openwrt_version' ] && echo -n `cat /etc/openwrt_version` | tr -d '\n'")
@@ -63,15 +62,15 @@ end
 	sysverformat = system_version
 	currentTimeStamp = os.date("%Y%m%d")
 	if model == "x86_64" then
-		api.exec(api.wget, {api._unpack(api.wget_args), "-O", version_file, "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "_" ..Variable4.. "/version.txt"}, nil, api.command_timeout)
-		remote_version = luci.sys.exec("echo -n $(curl -fsSL https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "_" ..Variable4.. "/version.txt) | tr -d '\n'")
+		api.exec(api.wget, {api._unpack(api.wget_args), "-O", version_file, "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "/version.txt"}, nil, api.command_timeout)
+		remote_version = luci.sys.exec("echo -n $(curl -fsSL https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3..  "/version.txt) | tr -d '\n'")
 		dateyr = remote_version
 		remoteformat = remote_version
 		if remoteformat > sysverformat and currentTimeStamp > remoteformat then needs_update = true else needs_update = false end
 		if fs.access("/sys/firmware/efi") then
-			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "_" ..Variable4.. "/" ..dateyr.. "-" ..Variable4.. "-openwrt-x86-64-generic-squashfs-combined-efi.img.gz"
+			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "/immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz"
 		else
-			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "_" ..Variable4.. "/" ..dateyr.. "-" ..Variable4.. "-openwrt-x86-64-generic-squashfs-combined.img.gz"
+			download_url = "https://github.com/" ..Variable1.. "/" ..Variable2.. "/releases/download/" ..Variable3.. "/immortalwrt-x86-64-generic-squashfs-combined.img.gz"
 		end
 	else
 		local needs_update = false
